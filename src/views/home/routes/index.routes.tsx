@@ -9,7 +9,7 @@ import { AboutUs, Landing } from "../pages"
 
 const HomeRoutes = function() {
   return <Switch>
-    <Route  index element={<Landing/>} />
+    <Route index element={<Landing/>} />
     <Route  path="about-us" element={<AboutUs/>} />
   </Switch>
 }
