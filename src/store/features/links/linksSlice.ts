@@ -25,22 +25,22 @@ export const fetchLinks = createAsyncThunk("links/fetchLinks", async () => {
 
 export const createLink = createAsyncThunk(
   "links/createLink",
-  async (initialLink) => {
-    const response = HTTP.baseApi().post("/shorteners", { data: initialLink });
+  async (initialLink:any) => {
+    const response = await HTTP.baseApi().post("/shorteners", { data: initialLink });
     return response.data.data;
   }
 );
 
 export const updateLink = createAsyncThunk(
   "links/updateLink",
-  async (initialLink) => {
+  async (initialLink: any) => {
     const { id } = initialLink;
     try {
       const response = await HTTP.baseApi().put(`/shorteners/${id}`, {
         data: initialLink,
       });
       return response.data.data;
-    } catch (err) {
+    } catch (err: any) {
       return err.message;
       // return initialLink; // only for testing Redux!
     }
@@ -49,13 +49,13 @@ export const updateLink = createAsyncThunk(
 
 export const deleteLink = createAsyncThunk(
   "links/deleteLink",
-  async (initialLink) => {
+  async (initialLink:any) => {
     const { id } = initialLink;
     try {
       const response = await HTTP.baseApi().delete(`/shorteners/${id}`);
       if (response?.data.status === 200) return initialLink;
       return `${response?.data.status}: ${response?.data.err_message}`;
-    } catch (err) {
+    } catch (err: any) {
       return err.message;
     }
   }
@@ -106,6 +106,7 @@ const slice = createSlice({
         const links = state.links.filter(link => link.id !== id);
         state.links = [...links, action.payload];
         state.count = count + 1
+        window.location.reload();
     })
       .addCase(updateLink.fulfilled, (state, action) => {
         if (!action.payload?.id) {
@@ -133,11 +134,11 @@ const slice = createSlice({
 });
 export default slice.reducer;
 
-export const getAllLinks = (state) => state.links.links;
-export const getTotalClicks = (state) => state.links.total_clicks;
-export const getVisitorCount = (state) => state.links.visitor_count;
-export const getLinksCount = (state) => state.links.count;
-export const getLinksStatus = (state) => state.links.status;
-export const getLinksError = (state) => state.links.error;
+export const getAllLinks = (state: any) => state.links.links;
+export const getTotalClicks = (state: any) => state.links.total_clicks;
+export const getVisitorCount = (state: any) => state.links.visitor_count;
+export const getLinksCount = (state: any) => state.links.count;
+export const getLinksStatus = (state: any) => state.links.status;
+export const getLinksError = (state: any) => state.links.error;
 
 const {} = slice.actions;

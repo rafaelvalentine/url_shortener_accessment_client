@@ -13,7 +13,7 @@ interface IProps {
 }
 
 function Index({ id, url, title, onHide }: IProps) {
-  const dispatch = useDispatch();
+  const dispatch: any = useDispatch();
 
   const handleUpdateLink = useCallback(
     ({ id, title, url }: { id: string; title?: string; url: string }) => {
@@ -30,8 +30,8 @@ function Index({ id, url, title, onHide }: IProps) {
       try {
         await handleUpdateLink({ ...values, id });
         onHide();
-      } catch (error) {
-        alert(err.message);
+      } catch (error:any) {
+        alert(error.message);
       }
     },
   });

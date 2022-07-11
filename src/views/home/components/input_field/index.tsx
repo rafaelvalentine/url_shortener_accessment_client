@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BsPlusLg } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { createLink } from "../../../../store";
+import { createLink, fetchLinks } from "../../../../store";
 
 
 createLink
@@ -23,12 +23,19 @@ const shortenerSchema = Yup.object().shape({
 
 function Index() {
 
-  const dispatch = useDispatch()
+  const dispatch:any = useDispatch()
 
 
   const handleCreateLink = useCallback(
     ({title, url, shortcode}: any) => {
       dispatch(createLink({title, url, shortcode}))
+    },
+    [],
+  )
+
+  const handleFetchLinks = useCallback(
+    () => {
+      dispatch(fetchLinks())
     },
     [],
   )
@@ -43,7 +50,8 @@ function Index() {
       // alert(JSON.stringify(values, null, 2));
 
       await handleCreateLink({...values})
-      formik.handleReset()
+      
+      // formik.handleReset()
     },
     validationSchema: shortenerSchema,
   });

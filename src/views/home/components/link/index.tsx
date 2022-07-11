@@ -20,7 +20,7 @@ interface IProps {
 function Index({ id, title, default_shorten_url, access_count, url }: IProps) {
   const [showCopied, setShowCopied] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch: any = useDispatch();
 
   const handleDeleteLink = useCallback(
     (id: string) => {

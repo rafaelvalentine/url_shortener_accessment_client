@@ -13,8 +13,11 @@ export default (() => {
     if (sessionStorage.getItem("token")) {
       token = sessionStorage.getItem("token");
     }
-    if (process.env.NODE_ENV && process.env.NODE_ENV === "production") {
-      baseURL = "https://ace-todo-node-api.herokuapp.com/api/v1";
+
+    if (import.meta.env.MODE && import.meta.env.MODE === "production") {
+      
+      // import.meta.env.VITE_XX 
+      baseURL = import.meta.env.VITE_API_URL;
     }
     return axios.create({
       baseURL,
