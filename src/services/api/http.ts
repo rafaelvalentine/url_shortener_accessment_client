@@ -17,7 +17,7 @@ export default (() => {
     if (import.meta.env.MODE && import.meta.env.MODE === "production") {
       
       // import.meta.env.VITE_XX 
-      baseURL = import.meta.env.VITE_API_URL;
+      baseURL = "https://rails-url-shortener-accessment.herokuapp.com";
     }
     return axios.create({
       baseURL,
